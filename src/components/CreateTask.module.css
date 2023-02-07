@@ -1,0 +1,47 @@
+.createTaskWrapper {
+  width: 100%;
+  height: 3.375rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  top: -1.6875rem;
+  position: relative;
+}
+
+.createTaskInput {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid var(--gray-700);
+  border-radius: 8px;
+  width: 39.875rem;
+  height: 3.375rem;
+  background-color: var(--gray-500);
+  color: var(--gray-100);
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.createTaskInput:focus-visible {
+  outline: 1px solid var(--purple-dark);
+}
+
+.createTaskButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  gap: 8px;
+
+  width: 5.625rem;
+  height: 3.25rem;
+
+  background: var(--blue-dark);
+  color: var(--gray-100);
+
+  border-radius: 8px;
+  border: none;
+
+  font-weight: 700;
+  cursor: pointer;
+}
