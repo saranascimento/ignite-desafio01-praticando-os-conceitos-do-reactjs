@@ -3,11 +3,11 @@ import { Trash } from "phosphor-react";
 
 import styles from "./TaskCreated.module.css";
 
-interface TaskCreatedProps {
+interface Content {
   content: string;
 }
 
-export function TaskCreated({ content }: TaskCreatedProps) {
+export function TaskCreated({ content }: Content) {
   return (
     <div className={styles.taskCreated}>
       <input type="checkbox" name="done" className={styles.checkbox}></input>
