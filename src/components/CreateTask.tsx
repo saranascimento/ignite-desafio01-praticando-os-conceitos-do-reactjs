@@ -12,7 +12,6 @@ export function CreateTask() {
   function handleCreateNewTask(event: FormEvent) {
     event.preventDefault();
 
-    // setTask([...task, newTaskText]);
     setTasks([...tasks, newTaskText]);
     setNewTaskText("");
 
