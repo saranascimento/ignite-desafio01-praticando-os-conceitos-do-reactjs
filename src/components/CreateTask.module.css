@@ -45,3 +45,7 @@
   font-weight: 700;
   cursor: pointer;
 }
+
+.createTaskButton:hover {
+  background: var(--blue);
+}

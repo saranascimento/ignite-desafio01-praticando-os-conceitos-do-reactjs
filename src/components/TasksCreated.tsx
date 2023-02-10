@@ -1,6 +1,20 @@
+import { TaskCreated } from "./TaskCreated.js";
 import styles from "./TasksCreated.module.css";
 
-import { Trash } from "phosphor-react";
+const tasks = [
+  {
+    content:
+      "Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.",
+  },
+  {
+    content:
+      "Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.",
+  },
+  {
+    content:
+      "Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.",
+  },
+];
 
 export function TasksCreated() {
   return (
@@ -15,18 +29,9 @@ export function TasksCreated() {
       </header>
       <footer>
         <div className={styles.todoList}>
-          <input
-            type="checkbox"
-            name="done"
-            className={styles.checkbox}
-          ></input>
-          <p>
-            Integer urna interdum massa libero auctor neque turpis turpis
-            semper. Duis vel sed fames integer.
-          </p>
-          <button title="Deletar comentário">
-            <Trash size={24} />
-          </button>
+          {tasks.map((task) => {
+            return <TaskCreated content={task.content} />;
+          })}
         </div>
       </footer>
     </article>
