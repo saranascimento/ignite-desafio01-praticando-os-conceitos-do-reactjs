@@ -22,6 +22,14 @@ export function CreateTask() {
     setNewTaskText(event.target.value);
   }
 
+  function deleteTask(taskToDelete: string) {
+    const tasksWithoutDeletedOne = tasks.filter((task) => {
+      return task !== taskToDelete;
+    });
+
+    setTasks(tasksWithoutDeletedOne);
+  }
+
   return (
     <>
       <form onSubmit={handleCreateNewTask} className={styles.createTaskWrapper}>
@@ -43,7 +51,7 @@ export function CreateTask() {
         </button>
       </form>
 
-      <TasksCreated tasks={tasks} />
+      <TasksCreated tasks={tasks} onDeleteTask={deleteTask} />
     </>
   );
 }

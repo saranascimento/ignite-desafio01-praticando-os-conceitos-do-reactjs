@@ -1,26 +1,12 @@
 import { TaskCreated } from "./TaskCreated.js";
 import styles from "./TasksCreated.module.css";
 
-// const tasks = [
-//   {
-//     content:
-//       "Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.",
-//   },
-//   {
-//     content:
-//       "Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.",
-//   },
-//   {
-//     content:
-//       "Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.",
-//   },
-// ];
-
 interface TasksCreatedProps {
   tasks: string[];
+  onDeleteTask: (task: string) => void;
 }
 
-export function TasksCreated({ tasks }: TasksCreatedProps) {
+export function TasksCreated({ tasks, onDeleteTask }: TasksCreatedProps) {
   return (
     <article className={styles.tasksCreatedWrapper}>
       <header className={styles.header}>
@@ -34,7 +20,13 @@ export function TasksCreated({ tasks }: TasksCreatedProps) {
       <footer>
         <div className={styles.todoList}>
           {tasks.map((task, index) => {
-            return <TaskCreated content={task} key={index} />;
+            return (
+              <TaskCreated
+                content={task}
+                key={index}
+                onDeleteTask={onDeleteTask}
+              />
+            );
           })}
         </div>
       </footer>
