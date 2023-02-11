@@ -10,9 +10,6 @@ interface Content {
 
 export function TaskCreated({ content, onDeleteTask }: Content) {
   function handleDeleteTask() {
-    // onDeleteTask(content);
-    console.log("deletar");
-
     onDeleteTask(content);
   }
 

@@ -22,6 +22,10 @@ export function CreateTask() {
     setNewTaskText(event.target.value);
   }
 
+  function handleNewTaskInvalid(event: ChangeEvent<HTMLInputElement>) {
+    console.log(event.target.setCustomValidity("Esse campo é obrigatório"));
+  }
+
   function deleteTask(taskToDelete: string) {
     const tasksWithoutDeletedOne = tasks.filter((task) => {
       return task !== taskToDelete;
@@ -29,6 +33,8 @@ export function CreateTask() {
 
     setTasks(tasksWithoutDeletedOne);
   }
+
+  const isNewTaskEmpty = newTaskText.length === 0;
 
   return (
     <>
@@ -41,8 +47,10 @@ export function CreateTask() {
           placeholder="Adicione uma nova tarefa"
           onChange={handleNewTaskCreatedChange}
           value={newTaskText}
+          required
+          onInvalid={handleNewTaskInvalid}
         />
-        <button className={styles.createTaskButton}>
+        <button className={styles.createTaskButton} disabled={isNewTaskEmpty}>
           Criar{" "}
           <img
             src={plusIcon}

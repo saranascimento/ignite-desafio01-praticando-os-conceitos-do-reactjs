@@ -46,6 +46,11 @@
   cursor: pointer;
 }
 
-.createTaskButton:hover {
+.createTaskButton:not(:disabled):hover {
   background: var(--blue);
+}
+
+.createTaskButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
