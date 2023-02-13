@@ -1,18 +1,25 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 
+import { v4 as uuidv4 } from "uuid";
+
 import plusIcon from "../assets/plus.svg";
 
 import styles from "./CreateTask.module.css";
 import { TasksCreated } from "./TasksCreated";
 
+interface Tasks {
+  content: string;
+  id: string;
+}
+
 export function CreateTask() {
-  const [tasks, setTasks] = useState(["test"]);
+  const [tasks, setTasks] = useState<Tasks[]>([]);
   const [newTaskText, setNewTaskText] = useState("");
 
   function handleCreateNewTask(event: FormEvent) {
     event.preventDefault();
 
-    setTasks([...tasks, newTaskText]);
+    setTasks([...tasks, { id: uuidv4(), content: newTaskText }]);
     setNewTaskText("");
   }
 
@@ -23,18 +30,20 @@ export function CreateTask() {
   }
 
   function handleNewTaskInvalid(event: ChangeEvent<HTMLInputElement>) {
-    console.log(event.target.setCustomValidity("Esse campo é obrigatório"));
+    event.target.setCustomValidity("Esse campo é obrigatório");
   }
 
-  function deleteTask(taskToDelete: string) {
+  function deleteTask(taskToDelete: Tasks) {
     const tasksWithoutDeletedOne = tasks.filter((task) => {
-      return task !== taskToDelete;
+      return task.id !== taskToDelete.id;
     });
 
     setTasks(tasksWithoutDeletedOne);
   }
 
   const isNewTaskEmpty = newTaskText.length === 0;
+  const isCreatedTasksEmpty = tasks.length === 0;
+  const numberOfCreatedTasks = tasks.length;
 
   return (
     <>
@@ -58,8 +67,12 @@ export function CreateTask() {
           />
         </button>
       </form>
-
-      <TasksCreated tasks={tasks} onDeleteTask={deleteTask} />
+      <TasksCreated
+        tasks={tasks}
+        numberOfCreatedTasks={numberOfCreatedTasks}
+        isCreatedTasksEmpty={isCreatedTasksEmpty}
+        onDeleteTask={deleteTask}
+      />
     </>
   );
 }
