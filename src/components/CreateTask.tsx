@@ -1,4 +1,4 @@
-import { useState, FormEvent, ChangeEvent } from "react";
+import { useState, FormEvent, ChangeEvent, useEffect } from "react";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -10,16 +10,29 @@ import { TasksCreated } from "./TasksCreated";
 interface Tasks {
   content: string;
   id: string;
+  isFinished: boolean;
 }
 
 export function CreateTask() {
   const [tasks, setTasks] = useState<Tasks[]>([]);
   const [newTaskText, setNewTaskText] = useState("");
+  const [numberOfCompletedtasks, setNumberOfCompletedtasks] = useState(0);
+
+  useEffect(() => {
+    const completedtasks = tasks.reduce((accumulator, { isFinished }) => {
+      return isFinished ? accumulator + 1 : accumulator;
+    }, 0);
+
+    setNumberOfCompletedtasks(completedtasks);
+  }, [tasks]);
 
   function handleCreateNewTask(event: FormEvent) {
     event.preventDefault();
 
-    setTasks([...tasks, { id: uuidv4(), content: newTaskText }]);
+    setTasks([
+      ...tasks,
+      { id: uuidv4(), content: newTaskText, isFinished: false },
+    ]);
     setNewTaskText("");
   }
 
@@ -41,9 +54,16 @@ export function CreateTask() {
     setTasks(tasksWithoutDeletedOne);
   }
 
-  const isNewTaskEmpty = newTaskText.length === 0;
-  const isCreatedTasksEmpty = tasks.length === 0;
-  const numberOfCreatedTasks = tasks.length;
+  function completeTask(taskToComplete: Tasks) {
+    const taskDone = tasks.map((task) =>
+      task.id === taskToComplete.id
+        ? { ...task, isFinished: !task.isFinished }
+        : task
+    );
+    setTasks(taskDone);
+  }
+
+  const isNewTaskEmpty = newTaskText.trim().length === 0;
 
   return (
     <>
@@ -69,9 +89,9 @@ export function CreateTask() {
       </form>
       <TasksCreated
         tasks={tasks}
-        numberOfCreatedTasks={numberOfCreatedTasks}
-        isCreatedTasksEmpty={isCreatedTasksEmpty}
         onDeleteTask={deleteTask}
+        onCompleteTask={completeTask}
+        numberOfCompletedtasks={numberOfCompletedtasks}
       />
     </>
   );
