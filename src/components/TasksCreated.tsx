@@ -50,6 +50,7 @@ export function TasksCreated({
               return (
                 <TaskCreated
                   task={task}
+                  isFinished={task.isFinished}
                   key={task.id}
                   onDeleteTask={onDeleteTask}
                   onCompleteTask={onCompleteTask}
