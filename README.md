@@ -20,11 +20,16 @@ Funcionalidades extras ao desafio:
 - Snackbar
 - Persistencia de dados no localStorage
 - Responsividade
+- Deploy da aplicação
 
 Tecnologias:
 
+- React
 - Typescript
 - CSS Modules
+
+Link do ToDo online:
+[ToDo List](https://sa-todo-list.vercel.app/)
 
 ### Screenshots do ToDo list:
 
